@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,9 +27,9 @@ h1{
 
 .card{
     background:white;
-    border-radius:10px;
+    border-radius:12px;
     overflow:hidden;
-    box-shadow:0 0 10px rgba(0,0,0,.1);
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
 .card img{
@@ -43,9 +43,13 @@ h1{
 }
 
 .precio{
-    color:green;
-    font-size:22px;
+    color:#0a8a0a;
     font-weight:bold;
+    font-size:24px;
+}
+
+.tallas{
+    color:#555;
 }
 
 </style>
@@ -56,20 +60,45 @@ h1{
 
 <h1>Catálogo de Ropa</h1>
 
-<div class="catalogo">
+<div class="catalogo" id="catalogo"></div>
 
+<script>
+
+fetch('productos.json')
+.then(response => response.json())
+.then(productos => {
+
+let html = '';
+
+productos.forEach(producto => {
+
+html += `
 <div class="card">
-<img src="https://via.placeholder.com/400x500">
+
+<img src="${producto.imagen}" alt="${producto.nombre}">
 
 <div class="info">
-<h3>Producto de prueba</h3>
-<p class="precio">$250</p>
-<p>Tallas: M, L, XL</p>
-</div>
+
+<h3>${producto.nombre}</h3>
+
+<p class="precio">$${producto.precio}</p>
+
+<p class="tallas">
+Tallas: ${producto.tallas}
+</p>
 
 </div>
 
 </div>
+`;
+
+});
+
+document.getElementById('catalogo').innerHTML = html;
+
+});
+
+</script>
 
 </body>
 </html>
