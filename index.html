@@ -2,47 +2,112 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Tu lugar privado para tu ropa</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BON4R FASHION</title>
 
     <style>
 
+        *{
+            box-sizing:border-box;
+        }
+
         body{
+            margin:0;
             font-family:'Segoe UI',sans-serif;
             background:#fafafa;
-            margin:0;
-            padding:0;
         }
 
         header{
             background:white;
-            padding:30px;
-            text-align:center;
-            box-shadow:0 2px 10px rgba(0,0,0,.06);
+            box-shadow:0 2px 10px rgba(0,0,0,.08);
+            padding:20px;
+        }
+
+        .header-top{
+            max-width:1200px;
+            margin:auto;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
         }
 
         header h1{
             margin:0;
-            font-size:40px;
+            font-size:38px;
         }
 
         header p{
+            margin:5px 0 0 0;
             color:#666;
-            margin-top:10px;
         }
 
         #carrito-contador{
-            margin-top:15px;
+            background:#111;
+            color:white;
+            padding:12px 20px;
+            border-radius:999px;
             font-weight:bold;
-            font-size:18px;
+        }
+
+        .hero{
+
+            height:400px;
+
+            background:
+            linear-gradient(
+                rgba(0,0,0,.45),
+                rgba(0,0,0,.45)
+            ),
+            url("imagenes/playera-negra.jpg");
+
+            background-size:cover;
+            background-position:center;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            text-align:center;
+            color:white;
+        }
+
+        .hero h2{
+            font-size:56px;
+            margin:0;
+        }
+
+        .hero p{
+            font-size:20px;
+            margin-top:10px;
+        }
+
+        .btn-ver{
+            display:inline-block;
+            margin-top:20px;
+            background:white;
+            color:black;
+            text-decoration:none;
+            padding:12px 25px;
+            border-radius:10px;
+            font-weight:bold;
         }
 
         .contenedor{
             max-width:1200px;
             margin:auto;
             padding:30px;
+        }
+
+        #buscador{
+            width:100%;
+            padding:15px;
+            font-size:16px;
+            border:1px solid #ddd;
+            border-radius:12px;
+            margin-bottom:30px;
         }
 
         .catalogo{
@@ -73,6 +138,10 @@
             padding:20px;
         }
 
+        .info h3{
+            margin-top:0;
+        }
+
         .precio{
             color:#00a43c;
             font-size:28px;
@@ -85,15 +154,14 @@
 
         .btn-carrito{
             width:100%;
+            border:none;
             background:#111;
             color:white;
-            border:none;
             padding:12px;
             border-radius:10px;
-            cursor:pointer;
             font-weight:bold;
+            cursor:pointer;
             margin-top:15px;
-            font-size:15px;
         }
 
         .btn-carrito:hover{
@@ -106,77 +174,140 @@
 
 <body>
 
-    <header>
-        <h1>BON4R FASHION</h1>
-        <p>Moda para cualquier ocasión</p>
+<header>
+
+    <div class="header-top">
+
+        <div>
+            <h1>BON4R FASHION</h1>
+            <p>Moda para cualquier ocasión</p>
+        </div>
 
         <div id="carrito-contador">
-            🛒 Carrito: 0
+            🛒 0
         </div>
-    </header>
-
-    <div class="contenedor">
-
-        <div class="catalogo" id="catalogo"></div>
 
     </div>
 
-    <script>
+</header>
 
-        let carrito = [];
+<section class="hero">
 
-        fetch('productos.json')
-        .then(response => response.json())
-        .then(productos => {
+    <div>
 
-            let html = '';
+        <h2>Nueva Colección</h2>
 
-            productos.forEach(producto => {
+        <p>
+            Descubre prendas seleccionadas para cualquier ocasión
+        </p>
 
-                html += `
-                <div class="card">
+        <a class="btn-ver" href="#catalogo">
+            Ver Catálogo
+        </a>
 
-                    <img src="${producto.imagen}" alt="${producto.nombre}">
+    </div>
 
-                    <div class="info">
+</section>
 
-                        <h3>${producto.nombre}</h3>
+<div class="contenedor">
 
-                        <p class="precio">$${producto.precio}</p>
+    <input
+        type="text"
+        id="buscador"
+        placeholder="🔍 Buscar producto..."
+    >
 
-                        <p class="tallas">
-                            Tallas: ${producto.tallas}
-                        </p>
+    <div class="catalogo" id="catalogo"></div>
 
-                        <button
-                            class="btn-carrito"
-                            onclick="agregarCarrito('${producto.sku}')">
-                            🛒 Agregar al carrito
-                        </button>
+</div>
 
-                    </div>
+<script>
 
-                </div>
-                `;
+let carrito = [];
+let productosGlobal = [];
 
-            });
+fetch('productos.json')
+.then(response => response.json())
+.then(productos => {
 
-            document.getElementById('catalogo').innerHTML = html;
+    productosGlobal = productos;
 
-        });
+    os);
 
-        function agregarCarrito(sku){
+})
+.catch(error => {
 
-            carrito.push(sku);
+    console.error(error);
 
-            document.getElementById('carrito-contador').innerText =
-                '🛒 Carrito: ' + carrito.length;
+    document.getElementById('catalogo').innerHTML =
+    '<h2>Error cargando productos</h2>';
 
-            console.log('Producto agregado:', sku);
+});
 
-        }
+function renderizarProductos(productos){
 
-    </script>
+    let html = '';
+
+    productos.forEach(producto => {
+
+        html += `
+        <div class="card">
+
+            <img src="${producto.imagen}" alt="${producto.nombre}">
+
+            <div class="info">
+
+                <h3>${producto.nombre}</h3>
+
+                <p class="precio">
+                    $${producto.precio}
+                </p>
+
+                <p class="tallas">
+                    Tallas: ${producto.tallas}
+                </p>
+
+                <button
+                    class="btn-carrito"
+                    onclick="agregarCarrito('${producto.sku}')">
+
+                    🛒 Agregar al carrito
+
+                </button>
+
+            </div>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById('catalogo').innerHTML = html;
+
+}
+
+function agregarCarrito(sku){
+
+    carrito.push(sku);
+
+    document.getElementById('carrito-contador').innerText =
+    '🛒 ' + carrito.length;
+
+}
+
+document.getElementById('buscador').addEventListener('input', function(){
+
+    const texto = this.value.toLowerCase();
+
+    const filtrados = productosGlobal.filter(producto =>
+        producto.nombre.toLowerCase().includes(texto)
+    );
+
+    renderizarProductos(filtrados);
+
+});
+
+</script>
 
 </body>
 
