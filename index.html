@@ -216,6 +216,33 @@
     opacity:1;
     visibility:visible;
 }
+        #btn-finalizar{
+    width:100%;
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+#btn-finalizar:hover{
+    background:#218838;
+}
+        .header-carrito{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#cerrar-carrito{
+    border:none;
+    background:none;
+    font-size:24px;
+    cursor:pointer;
+}
 
     </style>
 
@@ -228,7 +255,7 @@
     <div class="header-top">
 
         <div>
-            <h1>BON4R FASHION</h1>
+            <h1>Mexicali's Fashion</h1>
             <p>Moda para cualquier ocasión</p>
         </div>
 
@@ -412,17 +439,15 @@ document.getElementById('buscador').addEventListener('input', function(){
 </script>
 <div id="panel-carrito">
 
-    <h2>Mi Carrito</h2>
+    <div class="header-carrito">
 
-    <div id="lista-carrito"></div>
+        <h2>Mi Carrito</h2>
 
-    <hr>
+        <button id="cerrar-carrito" onclick="toggleCarrito()">
+            ✕
+        </button>
 
-    <h3 id="total-carrito">
-        Total: $0
-    </h3>
-
-</div>
+    </div>
 
 <div id="mensaje-exito">
     ✅ Producto agregado al carrito
