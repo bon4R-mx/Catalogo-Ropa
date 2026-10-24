@@ -171,6 +171,51 @@
         .btn-carrito:hover{
             background:#333;
         }
+        #panel-carrito{
+    position:fixed;
+    top:0;
+    right:-400px;
+    width:350px;
+    height:100%;
+    background:white;
+    box-shadow:-5px 0 15px rgba(0,0,0,.2);
+    padding:20px;
+    transition:.3s;
+    overflow-y:auto;
+    z-index:2000;
+}
+
+#panel-carrito.abierto{
+    right:0;
+}
+
+.item-carrito{
+    padding:10px 0;
+    border-bottom:1px solid #ddd;
+}
+#mensaje-exito{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#28a745;
+    color:white;
+    padding:15px 20px;
+    border-radius:10px;
+    font-weight:bold;
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:3000;
+}
+
+#mensaje-exito.mostrar{
+    opacity:1;
+    visibility:visible;
+}
 
     </style>
 
@@ -187,9 +232,9 @@
             <p>Moda para cualquier ocasión</p>
         </div>
 
-        <div id="carrito-contador">
-            🛒 0
-        </div>
+       <div id="carrito-contador" onclick="toggleCarrito()">
+    🛒 0
+</div>
 
     </div>
 
@@ -292,10 +337,63 @@ function renderizarProductos(productos){
 
 function agregarCarrito(sku){
 
-    carrito.push(sku);
+    const producto =
+        productosGlobal.find(p => p.sku === sku);
+
+    carrito.push(producto);
 
     document.getElementById('carrito-contador').innerText =
     '🛒 ' + carrito.length;
+
+    actualizarCarrito();
+    const mensaje =
+    document.getElementById('mensaje-exito');
+
+mensaje.classList.add('mostrar');
+
+setTimeout(() => {
+
+    mensaje.classList.remove('mostrar');
+
+}, 2000);
+
+}
+    function toggleCarrito(){
+
+    document
+        .getElementById('panel-carrito')
+        .classList.toggle('abierto');
+
+}
+
+function actualizarCarrito(){
+
+    let html = '';
+    let total = 0;
+
+    carrito.forEach(producto => {
+
+        total += Number(producto.precio);
+
+        html += `
+        <div class="item-carrito">
+
+            <strong>${producto.nombre}</strong>
+
+            <br>
+
+            $${producto.precio}
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById('lista-carrito').innerHTML =
+        html;
+
+    document.getElementById('total-carrito').innerText =
+        'Total: $' + total;
 
 }
 
@@ -312,7 +410,23 @@ document.getElementById('buscador').addEventListener('input', function(){
 });
 
 </script>
+<div id="panel-carrito">
 
+    <h2>Mi Carrito</h2>
+
+    <div id="lista-carrito"></div>
+
+    <hr>
+
+    <h3 id="total-carrito">
+        Total: $0
+    </h3>
+
+</div>
+
+<div id="mensaje-exito">
+    ✅ Producto agregado al carrito
+</div>
 </body>
 
 </html>
