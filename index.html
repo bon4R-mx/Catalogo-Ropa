@@ -89,4 +89,95 @@
             color:white;
             border:none;
             padding:12px;
-           
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:bold;
+            margin-top:15px;
+            font-size:15px;
+        }
+
+        .btn-carrito:hover{
+            background:#333;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>BON4R FASHION</h1>
+        <p>Moda para cualquier ocasión</p>
+
+        <div id="carrito-contador">
+            🛒 Carrito: 0
+        </div>
+    </header>
+
+    <div class="contenedor">
+
+        <div class="catalogo" id="catalogo"></div>
+
+    </div>
+
+    <script>
+
+        let carrito = [];
+
+        fetch('productos.json')
+        .then(response => response.json())
+        .then(productos => {
+
+            let html = '';
+
+            productos.forEach(producto => {
+
+                html += `
+                <div class="card">
+
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+
+                    <div class="info">
+
+                        <h3>${producto.nombre}</h3>
+
+                        <p class="precio">$${producto.precio}</p>
+
+                        <p class="tallas">
+                            Tallas: ${producto.tallas}
+                        </p>
+
+                        <button
+                            class="btn-carrito"
+                            onclick="agregarCarrito('${producto.sku}')">
+                            🛒 Agregar al carrito
+                        </button>
+
+                    </div>
+
+                </div>
+                `;
+
+            });
+
+            document.getElementById('catalogo').innerHTML = html;
+
+        });
+
+        function agregarCarrito(sku){
+
+            carrito.push(sku);
+
+            document.getElementById('carrito-contador').innerText =
+                '🛒 Carrito: ' + carrito.length;
+
+            console.log('Producto agregado:', sku);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
