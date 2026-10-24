@@ -243,6 +243,26 @@
     font-size:24px;
     cursor:pointer;
 }
+        .item-superior{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.btn-eliminar{
+    background:#dc3545;
+    color:white;
+    border:none;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.btn-eliminar:hover{
+    background:#bb2d3b;
+}
 
     </style>
 
@@ -385,6 +405,16 @@ setTimeout(() => {
 }, 2000);
 
 }
+    function eliminarDelCarrito(index){
+
+    carrito.splice(index, 1);
+
+    document.getElementById('carrito-contador').innerText =
+        '🛒 ' + carrito.length;
+
+    actualizarCarrito();
+
+}
     function toggleCarrito(){
 
     document
@@ -398,23 +428,33 @@ function actualizarCarrito(){
     let html = '';
     let total = 0;
 
-    carrito.forEach(producto => {
+    carrito.forEach((producto, index) => {
 
         total += Number(producto.precio);
 
         html += `
-        <div class="item-carrito">
+<div class="item-carrito">
 
+    <div class="item-superior">
+
+        <div>
             <strong>${producto.nombre}</strong>
-
             <br>
-
             $${producto.precio}
-
         </div>
-        `;
 
-    });
+        <button
+            class="btn-eliminar"
+            onclick="eliminarDelCarrito(${index})">
+
+            ➖
+
+        </button>
+
+    </div>
+
+</div>
+`;
 
     document.getElementById('lista-carrito').innerHTML =
         html;
