@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Catálogo de Ropa</title>
+<title>Tu lugar privado para tu ropa</title>
 
 <style>
 
 body{
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
     background:#fafafa;
     margin:0;
     padding:0;
@@ -29,6 +30,7 @@ header h1{
 
 header p{
     color:#666;
+    margin-top:10px;
 }
 
 .contenedor{
@@ -71,6 +73,10 @@ header p{
     font-weight:bold;
 }
 
+.tallas{
+    color:#666;
+}
+
 .btn-whatsapp{
     display:block;
     margin-top:15px;
@@ -83,15 +89,26 @@ header p{
     font-weight:bold;
 }
 
+.btn-whatsapp:hover{
+    background:#1ea952;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<h1>Catálogo de Ropa</h1>
+<header>
+    <h1>BON4R FASHION</h1>
+    <p>Moda para cualquier ocasión</p>
+</header>
 
-<div class="catalogo" id="catalogo"></div>
+<div class="contenedor">
+
+    <div class="catalogo" id="catalogo"></div>
+
+</div>
 
 <script>
 
@@ -118,6 +135,15 @@ html += `
 Tallas: ${producto.tallas}
 </p>
 
+<a
+class="btn-whatsapp"
+href="https://wa.me/526861139560?text=Hola,%20me%20interesa%20${producto.nombre}"
+target="_blank">
+
+🟢 Consultar por WhatsApp
+
+</a>
+
 </div>
 
 </div>
@@ -132,4 +158,5 @@ document.getElementById('catalogo').innerHTML = html;
 </script>
 
 </body>
+
 </html>
