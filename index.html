@@ -282,7 +282,19 @@
     padding:25px;
     border-radius:15px;
 }
-        
+        .header-modal{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#cerrar-modal{
+    border:none;
+    background:none;
+    font-size:24px;
+    cursor:pointer;
+    padding:5px 10px;
+}
     </style>
 
 </head>
@@ -448,6 +460,12 @@ function abrirFormularioCliente(){
     'block';
 
 }
+function cerrarModalCliente(){
+
+    document.getElementById('modal-cliente').style.display =
+    'none';
+
+}
     
 function actualizarCarrito(){
 
@@ -537,7 +555,15 @@ document.getElementById('buscador').addEventListener('input', function(){
 
     <div id="contenido-cliente">
 
-        <h2>Identificación de Cliente</h2>
+       <div class="header-modal">
+
+    <h2>Identificación de Cliente</h2>
+
+    <button id="cerrar-modal" onclick="cerrarModalCliente()">
+        ✕
+    </button>
+
+</div>
 
         <button onclick="soyCliente()">
             ✅ Ya soy cliente
