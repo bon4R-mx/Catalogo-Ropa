@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "sku":"P001",
+    "nombre":"Playera Negra Oversize",
+    "precio":250,
+    "tallas":"M,L,XL",
+    "imagen":"imagenes/playera-negra.jpg"
+  }
+]
