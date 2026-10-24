@@ -504,17 +504,52 @@ function cerrarModalCliente(){
     `;
 
 }
-    function registrarCliente(){
+   function registrarCliente(){
 
     const clienteId =
         'MXF-' + Math.floor(Math.random() * 9000 + 1000);
 
-    alert(
-        '✅ Cliente registrado\n\n' +
-        'Su número de cliente es:\n\n' +
-        clienteId +
-        '\n\nGuárdelo para futuras compras.'
-    );
+    const nombre =
+        document.getElementById('nombreCliente').value;
+
+    const celular =
+        document.getElementById('telefonoCliente').value;
+
+    const correo =
+        document.getElementById('correoCliente').value;
+
+    fetch(
+        'https://script.google.com/macros/s/AKfycbzqVeUqNlvnC4tuK3skX575NebZcIsZx2V6QhPhoxbh_ygLEUINBzQZrZLUBLlui7Gn/exec',
+        {
+            method:'POST',
+            body:JSON.stringify({
+                clienteId:clienteId,
+                nombre:nombre,
+                celular:celular,
+                correo:correo
+            })
+        }
+    )
+    .then(response => response.text())
+    .then(() => {
+
+        alert(
+            '✅ Cliente registrado\n\n' +
+            'Su número de cliente es:\n\n' +
+            clienteId +
+            '\n\nGuárdelo para futuras compras.'
+        );
+
+        cerrarModalCliente();
+
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        alert('Error registrando cliente');
+
+    });
 
 }
 function actualizarCarrito(){
