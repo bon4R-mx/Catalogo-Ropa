@@ -1,1 +1,75 @@
-Mi Catálogo de Ropa
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Catálogo de Ropa</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+}
+
+.catalogo{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+.info{
+    padding:15px;
+}
+
+.precio{
+    color:green;
+    font-size:22px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Catálogo de Ropa</h1>
+
+<div class="catalogo">
+
+<div class="card">
+<img src="https://via.placeholder.com/400x500">
+
+<div class="info">
+<h3>Producto de prueba</h3>
+<p class="precio">$250</p>
+<p>Tallas: M, L, XL</p>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
