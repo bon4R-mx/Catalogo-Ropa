@@ -5,5 +5,19 @@
     "precio":250,
     "tallas":"M,L,XL",
     "imagen":"imagenes/playera-negra.jpg"
+  },
+  {
+    "sku":"P002",
+    "nombre":"Chamarra Verde",
+    "precio":550,
+    "tallas":"M,L",
+    "imagen":"imagenes/Chamarra verde.jpg"
+  },
+  {
+    "sku":"P003",
+    "nombre":"Vestido Rojo",
+    "precio":650,
+    "tallas":"S,M,L",
+    "imagen":"imagenes/vestido rojo.jpg"
   }
 ]
