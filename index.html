@@ -310,6 +310,17 @@
 #btn-continuar-pedido:hover{
     background:#0056b3;
 }
+        #btn-enviar-pedido{
+    width:100%;
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:15px;
+}
     </style>
 
 </head>
@@ -657,8 +668,45 @@ function cerrarModalCliente(){
 }
 function continuarPedido(){
 
+    document.getElementById('contenido-dinamico').innerHTML = `
+
+        <hr>
+
+        <h3>Resumen del Pedido</h3>
+
+        <div id="resumen-pedido"></div>
+
+        <button
+            id="btn-enviar-pedido"
+            onclick="enviarPedido()">
+
+            Enviar Pedido
+
+        </button>
+
+    `;
+
+    let html = '';
+
+    carrito.forEach(producto => {
+
+        html += `
+            <p>
+                ${producto.nombre}
+                - $${producto.precio}
+            </p>
+        `;
+
+    });
+
+    document.getElementById('resumen-pedido').innerHTML =
+        html;
+
+}
+    function enviarPedido(){
+
     alert(
-        '✅ Cliente validado\n\nContinuaremos con el pedido.'
+        '✅ Pedido listo para enviarse'
     );
 
 }
