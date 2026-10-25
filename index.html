@@ -544,7 +544,13 @@ function cerrarModalCliente(){
 
     const correo =
         document.getElementById('correoCliente').value;
-
+console.log({
+    tipo:'pedido',
+    pedidoId:pedidoId,
+    clienteId:clienteActual.clienteId,
+    productos:productos,
+    total:total
+});
     fetch(
         'https://script.google.com/macros/s/AKfycbzqVeUqNlvnC4tuK3skX575NebZcIsZx2V6QhPhoxbh_ygLEUINBzQZrZLUBLlui7Gn/exec'
         ,
