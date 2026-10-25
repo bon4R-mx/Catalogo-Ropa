@@ -544,16 +544,9 @@ function cerrarModalCliente(){
 
     const correo =
         document.getElementById('correoCliente').value;
-console.log({
-    tipo:'pedido',
-    pedidoId:pedidoId,
-    clienteId:clienteActual.clienteId,
-    productos:productos,
-    total:total
-});
+
     fetch(
-        'https://script.google.com/macros/s/AKfycbzqVeUqNlvnC4tuK3skX575NebZcIsZx2V6QhPhoxbh_ygLEUINBzQZrZLUBLlui7Gn/exec'
-        ,
+        'https://script.google.com/macros/s/AKfycbzqVeUqNlvnC4tuK3skX575NebZcIsZx2V6QhPhoxbh_ygLEUINBzQZrZLUBLlui7Gn/exec',
         {
             method:'POST',
             mode:'no-cors',
@@ -565,7 +558,6 @@ console.log({
             })
         }
     )
-    .then(response => response.text())
     .then(() => {
 
         alert(
@@ -624,40 +616,43 @@ console.log({
     .then(response => response.json())
     .then(data => {
 
-       if(data.encontrado){
-    clienteActual = data;
-    document.getElementById('contenido-dinamico').innerHTML = `
+        if(data.encontrado){
 
-        <hr>
+            clienteActual = data;
 
-        <h3>✅ Cliente encontrado</h3>
+            document.getElementById('contenido-dinamico').innerHTML = `
 
-        <p>
-            <strong>Nombre:</strong><br>
-            ${data.nombre}
-        </p>
+                <hr>
 
-        <p>
-            <strong>Celular:</strong><br>
-            ${data.celular}
-        </p>
+                <h3>✅ Cliente encontrado</h3>
 
-        <p>
-            <strong>Correo:</strong><br>
-            ${data.correo}
-        </p>
+                <p>
+                    <strong>Nombre:</strong><br>
+                    ${data.nombre}
+                </p>
 
-        <button
-            id="btn-continuar-pedido"
-            onclick="continuarPedido()">
+                <p>
+                    <strong>Celular:</strong><br>
+                    ${data.celular}
+                </p>
 
-            Continuar con Pedido
+                <p>
+                    <strong>Correo:</strong><br>
+                    ${data.correo}
+                </p>
 
-        </button>
+                <button
+                    id="btn-continuar-pedido"
+                    onclick="continuarPedido()">
 
-    `;
+                    Continuar con Pedido
 
-} else {
+                </button>
+
+            `;
+
+        }
+        else{
 
             alert('❌ Cliente no encontrado');
 
@@ -710,7 +705,7 @@ function continuarPedido(){
         html;
 
 }
-   function enviarPedido(){
+ function enviarPedido(){
 
     const pedidoId =
         'PED-' + Math.floor(Math.random() * 90000 + 10000);
