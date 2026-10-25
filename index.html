@@ -584,9 +584,36 @@ function cerrarModalCliente(){
     const clienteId =
         document.getElementById('clienteExistente').value;
 
-    alert(
-        'Buscar cliente: ' + clienteId
-    );
+    fetch(
+        'https://script.google.com/macros/s/AKfycbzqVeUqNlvnC4tuK3skX575NebZcIsZx2V6QhPhoxbh_ygLEUINBzQZrZLUBLlui7Gn/exec?clienteId=' +
+        encodeURIComponent(clienteId)
+    )
+    .then(response => response.json())
+    .then(data => {
+
+        if(data.encontrado){
+
+            alert(
+                '✅ Cliente encontrado\n\n' +
+                'Nombre: ' + data.nombre +
+                '\nCelular: ' + data.celular +
+                '\nCorreo: ' + data.correo
+            );
+
+        } else {
+
+            alert('❌ Cliente no encontrado');
+
+        }
+
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        alert('Error buscando cliente');
+
+    });
 
 }
 
