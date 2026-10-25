@@ -295,6 +295,21 @@
     cursor:pointer;
     padding:5px 10px;
 }
+        #btn-continuar-pedido{
+    width:100%;
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+#btn-continuar-pedido:hover{
+    background:#0056b3;
+}
     </style>
 
 </head>
@@ -591,16 +606,40 @@ function cerrarModalCliente(){
     .then(response => response.json())
     .then(data => {
 
-        if(data.encontrado){
+       if(data.encontrado){
 
-            alert(
-                '✅ Cliente encontrado\n\n' +
-                'Nombre: ' + data.nombre +
-                '\nCelular: ' + data.celular +
-                '\nCorreo: ' + data.correo
-            );
+    document.getElementById('contenido-dinamico').innerHTML = `
 
-        } else {
+        <hr>
+
+        <h3>✅ Cliente encontrado</h3>
+
+        <p>
+            <strong>Nombre:</strong><br>
+            ${data.nombre}
+        </p>
+
+        <p>
+            <strong>Celular:</strong><br>
+            ${data.celular}
+        </p>
+
+        <p>
+            <strong>Correo:</strong><br>
+            ${data.correo}
+        </p>
+
+        <button
+            id="btn-continuar-pedido"
+            onclick="continuarPedido()">
+
+            Continuar con Pedido
+
+        </button>
+
+    `;
+
+} else {
 
             alert('❌ Cliente no encontrado');
 
@@ -616,7 +655,13 @@ function cerrarModalCliente(){
     });
 
 }
+function continuarPedido(){
 
+    alert(
+        '✅ Cliente validado\n\nContinuaremos con el pedido.'
+    );
+
+}
 function actualizarCarrito(){
 
     let html = '';
