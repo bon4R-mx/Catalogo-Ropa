@@ -554,6 +554,42 @@ function cerrarModalCliente(){
     });
 
 }
+    function soyCliente(){
+
+    document.getElementById('contenido-dinamico').innerHTML = `
+
+        <hr>
+
+        <input
+            id="clienteExistente"
+            type="text"
+            placeholder="Número de Cliente (MXF-1001)"
+            style="width:100%;padding:10px;margin-top:10px;"
+        >
+
+        <button
+            onclick="buscarCliente()"
+            style="width:100%;padding:12px;margin-top:15px;">
+
+            Buscar Cliente
+
+        </button>
+
+    `;
+
+}
+
+    function buscarCliente(){
+
+    const clienteId =
+        document.getElementById('clienteExistente').value;
+
+    alert(
+        'Buscar cliente: ' + clienteId
+    );
+
+}
+
 function actualizarCarrito(){
 
     let html = '';
