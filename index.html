@@ -786,7 +786,7 @@ function continuarPedido(){
         document.getElementById('panel-carrito')
             .classList.remove('abierto');
 
-    }, 3000);
+    }, 5000);
 
 }
     function mostrarConfirmacionPedido(
@@ -831,6 +831,22 @@ function continuarPedido(){
                 a tu correo electrónico.
             </p>
 
+            <button
+    onclick="cerrarConfirmacion()"
+    style="
+        background:#28a745;
+        color:white;
+        border:none;
+        padding:12px 25px;
+        border-radius:10px;
+        cursor:pointer;
+        font-weight:bold;
+        margin-top:15px;
+    "
+>
+    Cerrar
+</button>
+
         </div>
 
     `;
@@ -845,15 +861,27 @@ function continuarPedido(){
 
     setTimeout(() => {
 
-        cerrarModalCliente();
+    cerrarConfirmacion();
 
-        document.getElementById(
-            'panel-carrito'
-        ).classList.remove('abierto');
-
-    }, 3000);
+}, 5000);
 
 }
+function cerrarConfirmacion(){
+
+    carrito = [];
+
+    actualizarCarrito();
+
+    document.getElementById('carrito-contador').innerText =
+        '🛒 0';
+
+    cerrarModalCliente();
+
+    document.getElementById('panel-carrito')
+        .classList.remove('abierto');
+
+}
+    
 function actualizarCarrito(){
 
     let html = '';
