@@ -563,7 +563,10 @@ function cerrarModalCliente(){
         }
     )
     .then(() => {
-
+     localStorage.setItem(
+        'clienteId',
+        clienteId
+    );
         alert(
             '✅ Cliente registrado\n\n' +
             'Su número de cliente es:\n\n' +
@@ -623,7 +626,10 @@ const clienteGuardado =
     .then(data => {
 
         if(data.encontrado){
-
+        localStorage.setItem(
+        'clienteId',
+        data.clienteId
+    );
             clienteActual = data;
 
             document.getElementById('contenido-dinamico').innerHTML = `
