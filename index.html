@@ -584,17 +584,19 @@ function cerrarModalCliente(){
 
 }
     function soyCliente(){
-
+const clienteGuardado =
+    localStorage.getItem('clienteId');
     document.getElementById('contenido-dinamico').innerHTML = `
 
         <hr>
 
-        <input
-            id="clienteExistente"
-            type="text"
-            placeholder="Número de Cliente (MXF-1001)"
-            style="width:100%;padding:10px;margin-top:10px;"
-        >
+    <input
+    id="clienteExistente"
+    type="text"
+    placeholder="Número de Cliente (MXF-1001)"
+    value="${clienteGuardado || ''}"
+    style="width:100%;padding:10px;margin-top:10px;"
+>
 
         <button
             onclick="buscarCliente()"
