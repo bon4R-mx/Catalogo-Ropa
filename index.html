@@ -250,18 +250,15 @@
 }
 
 .btn-eliminar{
-    background:#dc3545;
-    color:white;
     border:none;
-    width:35px;
-    height:35px;
-    border-radius:50%;
+    background:none;
     cursor:pointer;
-    font-size:16px;
+    font-size:20px;
+    padding:5px;
 }
 
 .btn-eliminar:hover{
-    background:#bb2d3b;
+    transform:scale(1.1);
 }
 #modal-cliente{
     display:none;
@@ -913,13 +910,13 @@ function actualizarCarrito(){
             $${producto.precio}
         </div>
 
-        <button
-            class="btn-eliminar"
-            onclick="eliminarDelCarrito(${index})">
+     <button
+    class="btn-eliminar"
+    onclick="eliminarDelCarrito(${index})">
 
-            ➖
+    🗑️
 
-        </button>
+</button>
 
     </div>
 
