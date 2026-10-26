@@ -486,6 +486,9 @@ function abrirFormularioCliente(){
     document.getElementById('modal-cliente').style.display =
     'block';
 
+    document.getElementById('contenido-dinamico').innerHTML =
+        '';
+
 }
 function cerrarModalCliente(){
 
@@ -979,7 +982,9 @@ document.getElementById('buscador').addEventListener('input', function(){
     </button>
 
 </div>
-
+ <p>
+        Selecciona una opción para continuar:
+    </p>
         <button onclick="soyCliente()">
             ✅ Ya soy cliente
         </button>
