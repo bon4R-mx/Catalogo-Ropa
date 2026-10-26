@@ -728,7 +728,7 @@ function continuarPedido(){
     }).join(', ');
 
     fetch(
-        'TU_URL_APPS_SCRIPT',
+        'https://script.google.com/macros/s/AKfycbzqVeUqNlvnC4tuK3skX575NebZcIsZx2V6QhPhoxbh_ygLEUINBzQZrZLUBLlui7Gn/exec',
         {
             method:'POST',
             mode:'no-cors',
@@ -742,10 +742,51 @@ function continuarPedido(){
         }
     );
 
-    mostrarConfirmacionPedido(
-        pedidoId,
-        total
-    );
+    document.getElementById('contenido-dinamico').innerHTML = `
+
+        <div style="text-align:center;padding:20px;">
+
+            <h2 style="color:#28a745;">
+                ✅ Pedido recibido
+            </h2>
+
+            <p>
+                Hemos recibido tu pedido correctamente.
+            </p>
+
+            <p>
+                <strong>Pedido:</strong>
+                ${pedidoId}
+            </p>
+
+            <p>
+                <strong>Total:</strong>
+                $${total}
+            </p>
+
+            <p>
+                Revisa tu correo para más detalles.
+            </p>
+
+        </div>
+
+    `;
+
+    setTimeout(() => {
+
+        carrito = [];
+
+        actualizarCarrito();
+
+        document.getElementById('carrito-contador').innerText =
+            '🛒 0';
+
+        cerrarModalCliente();
+
+        document.getElementById('panel-carrito')
+            .classList.remove('abierto');
+
+    }, 3000);
 
 }
     function mostrarConfirmacionPedido(
