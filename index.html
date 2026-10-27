@@ -113,6 +113,7 @@
             border-radius:12px;
             margin-bottom:30px;
         }
+        
 
         .catalogo{
             display:grid;
@@ -318,6 +319,25 @@
     font-weight:bold;
     margin-top:15px;
 }
+        #categorias{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+#categorias button{
+    border:none;
+    background:#111;
+    color:white;
+    padding:10px 15px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+#categorias button:hover{
+    background:#333;
+}
     </style>
 
 </head>
@@ -367,6 +387,30 @@
         placeholder="🔍 Buscar producto..."
     >
 
+    <div id="categorias">
+
+        <button onclick="filtrarCategoria('Todos')">
+            Todos
+        </button>
+
+        <button onclick="filtrarCategoria('Vestidos')">
+            Vestidos
+        </button>
+
+        <button onclick="filtrarCategoria('Playeras')">
+            Playeras
+        </button>
+
+        <button onclick="filtrarCategoria('Blusas')">
+            Blusas
+        </button>
+
+        <button onclick="filtrarCategoria('Pantalones')">
+            Pantalones
+        </button>
+
+    </div>
+
     <div class="catalogo" id="catalogo"></div>
 
 </div>
@@ -376,6 +420,7 @@
 let carrito = [];
 let productosGlobal = [];
 let clienteActual = null;
+let categoriaActual = 'Todos';
 
 fetch('productos.json')
 .then(response => response.json())
@@ -889,7 +934,42 @@ function cerrarConfirmacion(){
         .classList.remove('abierto');
 
 }
-    
+    function filtrarCategoria(categoria){
+
+    categoriaActual = categoria;
+
+    aplicarFiltros();
+
+}
+    function aplicarFiltros(){
+
+    const texto =
+        document.getElementById('buscador')
+        .value
+        .toLowerCase();
+
+    let productos = productosGlobal;
+
+    if(categoriaActual !== 'Todos'){
+
+        productos =
+            productos.filter(producto =>
+                producto.categoria === categoriaActual
+            );
+
+    }
+
+    productos =
+        productos.filter(producto =>
+            producto.nombre
+                .toLowerCase()
+                .includes(texto)
+        );
+
+    renderizarProductos(productos);
+
+}
+
 function actualizarCarrito(){
 
     let html = '';
@@ -932,17 +1012,8 @@ function actualizarCarrito(){
 
 }
 
-document.getElementById('buscador').addEventListener('input', function(){
-
-    const texto = this.value.toLowerCase();
-
-    const filtrados = productosGlobal.filter(producto =>
-        producto.nombre.toLowerCase().includes(texto)
-    );
-
-    renderizarProductos(filtrados);
-
-});
+document.getElementById('buscador')
+    .addEventListener('input', aplicarFiltros);
 
 </script>
 <div id="panel-carrito">
