@@ -3,6 +3,7 @@
     "sku":"P001",
     "nombre":"Playera Negra Oversize",
     "precio":250,
+    "categoria": "Camisa",
     "tallas":"M,L,XL",
     "imagen":"imagenes/playera-negra.jpg"
   },
@@ -10,6 +11,7 @@
     "sku":"P002",
     "nombre":"Chamarra Verde",
     "precio":550,
+    "categoria": "Chamarra",
     "tallas":"M,L",
     "imagen":"imagenes/Chamarra verde.jpg"
   },
@@ -17,6 +19,7 @@
     "sku":"P003",
     "nombre":"Vestido Rojo",
     "precio":650,
+    "categoria": "Vestido",
     "tallas":"S,M,L",
     "imagen":"imagenes/vestido rojo.jpg"
   }
